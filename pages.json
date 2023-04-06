@@ -1,17 +1,54 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "uni-app"
-			}
-		}
-	],
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
-	},
-	"uniIdRouter": {}
+  "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+    {
+      "path": "pages/list/list",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/tongji/tongji",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/my/my",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }
+  ],
+
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "熊猫记账",
+    "navigationBarBackgroundColor": "#5B9E6F",
+    "backgroundColor": "#5B9E6F"
+  },
+
+  "tabBar": {
+    "selectedColor": "#5B9E6F",
+    "list": [{
+      "pagePath": "pages/list/list",
+      "text": "列表",
+      "iconPath": "static/1.png",
+      "selectedIconPath": "static/1.png"
+    }, {
+      "pagePath": "pages/tongji/tongji",
+      "text": "统计",
+      "iconPath": "static/2.png",
+      "selectedIconPath": "static/2.png"
+    }, {
+      "pagePath": "pages/my/my",
+      "text": "我的",
+      "iconPath": "static/3.png",
+      "selectedIconPath": "static/3.png"
+    }]
+  }
+
 }
