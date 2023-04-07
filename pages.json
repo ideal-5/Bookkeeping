@@ -23,16 +23,26 @@
 
     }
   ],
+  "subPackages": [{
+    "root": "subpkg",
+    "pages": [{
+      "path": "addList/addList",
+      "style": {
+        "navigationBarTitleText": "添加账单",
+        "enablePullDownRefresh": false
+      }
+    }]
+  }],
 
   "globalStyle": {
-    "navigationBarTextStyle": "black",
+    "navigationBarTextStyle": "white",
     "navigationBarTitleText": "熊猫记账",
-    "navigationBarBackgroundColor": "#5B9E6F",
-    "backgroundColor": "#5B9E6F"
+    "navigationBarBackgroundColor": "#004643",
+    "backgroundColor": "#004643"
   },
 
   "tabBar": {
-    "selectedColor": "#5B9E6F",
+    "selectedColor": "#004643",
     "list": [{
       "pagePath": "pages/list/list",
       "text": "列表",
