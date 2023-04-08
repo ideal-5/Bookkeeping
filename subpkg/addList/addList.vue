@@ -1,111 +1,127 @@
 <template>
-  <view class="container">
-    <view class="form-item">
-      <text class="label">类别</text>
-      <select class="select" v-model="category">
-        <option value="food">食品</option>
-        <option value="transportation">交通</option>
-        <option value="housing">住房</option>
-        <option value="entertainment">娱乐</option>
-        <option value="none">无</option>
-      </select>
+  <view class="da">
+    <view class="da2">
+
+
+      <view class="car">
+        <view class="inp">
+          <uni-data-select placeholder="类型" class="class-input" v-model="class1" :localdata="range"></uni-data-select>
+        </view>
+
+        <view class="inp">
+          <input type="number" v-model="amount" placeholder="金额是多少呢">
+        </view>
+
+        <view class="inp">
+          <uni-data-select placeholder="收入或支出" class="class-input" v-model="type" :localdata="range2"></uni-data-select>
+        </view>
+
+        <view class="inp">
+          <input type="text" v-model="remarks" placeholder="对这个账单做点描述">
+        </view>
+      </view>
+
+      <view class="btn-box">
+        <button class="btn" @click="updataList">添加到账单</button>
+      </view>
     </view>
-    <view class="form-item">
-      <text class="label">时间</text>
-      <picker class="picker" mode="date" v-model="date">
-        <view class="picker-content">{{ date }}</view>
-      </picker>
-    </view>
-    <view class="form-item">
-      <text class="label">金额</text>
-      <input class="input" type="number" v-model="amount" placeholder="请输入金额" />
-    </view>
-    <view class="form-item">
-      <text class="label">描述</text>
-      <textarea class="textarea" v-model="description" placeholder="请输入描述"></textarea>
-    </view>
-    <view class="form-item">
-      <text class="label">收支</text>
-      <select class="select" v-model="type">
-        <option value="income">收入</option>
-        <option value="expense">支出</option>
-      </select>
-    </view>
-    <button class="submit-btn">提交</button>
   </view>
 </template>
-
 
 <script>
   export default {
     data() {
       return {
-        category: '',
-        date: '',
-        amount: '',
-        description: '',
-        type: '',
+        amount: 0,
+        class1: 0,
+        type: 0,
+        remarks: '',
+        range: [
+          { value: 0, text: "无" },
+          { value: 1, text: "食品" },
+          { value: 2, text: "交通" },
+          { value: 3, text: "住房" },
+          { value: 4, text: "娱乐" },
+        ],
+        range2: [
+          { value: 0, text: '支出' },
+          { value: 1, text: "收入" },
+        ]
       };
     },
+    methods: {
+      async updataList() {
+        if (this.amount == 0) {
+          uni.showToast({
+            title: '金额必须填写'
+          })
+          return
+        }
+        let data = {
+          amount: this.amount,
+          class: this.range[this.class1].text,
+          type: this.type === 0 ? -1 : 1,
+          remarks: this.remarks,
+          time: new Date()
+        }
+        let { data: res } = await this.$api({ url: '/updataList', method: 'POST', data })
+        if (res.msg === '添加成功') {
+          uni.switchTab({
+            url: "/pages/list/list"
+          })
+        } else {
+          uni.showToast({
+            title: '添加失败'
+          })
+        }
+      }
+    }
   };
 </script>
 
 <style lang="scss">
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+  .da {
+    height: 100%;
+    background-color: #fffffe;
+    border-top: 3px solid #e3f6f5;
 
-    .form-item {
+
+    .da2 {
       display: flex;
-      flex-direction: row;
-      align-items: center;
-      margin-bottom: 20rpx;
-
-      .label {
-        width: 120rpx;
-        font-size: 32rpx;
-      }
-
-      .select,
-      .picker,
-      .input,
-      .textarea {
-        flex: 1;
-        height: 60rpx;
-        font-size: 28rpx;
-        padding: 0 20rpx;
-        border: none;
-        border-radius: 10rpx;
-        background-color: #f5f5f5;
-        -webkit-appearance: none;
-      }
-
-      .select::-ms-expand {
-        display: none;
-      }
-
-      .picker-content {
-        text-align: right;
-      }
-
-      .textarea {
-        height: 120rpx;
-        padding: 10rpx 20rpx;
-      }
-    }
-
-    .submit-btn {
+      flex-direction: column;
       width: 80%;
-      height: 80rpx;
-      margin-top: 40rpx;
-      background-color: #FFC107;
-      border: none;
-      border-radius: 10rpx;
-      font-size: 32rpx;
-      color: #fff;
+      // margin-left: 10px;
+      margin-left: 38px;
+      margin-top: 20px;
+      text-align: center;
+      background-color: #ffd803;
+      height: 60%;
+      justify-content: space-around;
+      border-radius: 10px;
+      border: 3px solid black;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.12);
+
+      .car {
+        .inp {
+          margin: 8px 3px;
+          border: 3px solid black;
+          padding: 5px;
+          border-radius: 10px;
+        }
+      }
+
+      // 按钮默认样式
+      .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        border: 2px solid #000;
+        border-radius: 20px;
+        background-color: #272343;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      }
     }
   }
 </style>

@@ -8,7 +8,7 @@ export const myRequest = (opt) => {
       success: (res) => { // 成功的回调
         if (res.data.code !== '0000') { // 如果状态码不是0000就说明数据读取失败
           return uni.showToast({
-            title: '数据获取失败' + res.data.code,
+            title: '数据获取失败111' + res.data.code,
           })
         }
         resolve(res) // 数据请求成功并且code==0000 就用resolve将数据返回出去可以在.then中获得

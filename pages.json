@@ -29,7 +29,9 @@
       "path": "addList/addList",
       "style": {
         "navigationBarTitleText": "添加账单",
-        "enablePullDownRefresh": false
+        "enablePullDownRefresh": false,
+        "navigationBarBackgroundColor": "#fffffe",
+        "navigationBarTextStyle": "black"
       }
     }]
   }],
